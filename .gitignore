@@ -1,0 +1,8 @@
+/pgdata
+/.env
+/docker.env
+/src/ormconfig.ts
+/node_modules
+/dist
+.idea
+/src/public
