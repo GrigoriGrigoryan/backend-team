@@ -12,7 +12,7 @@ const config: ConnectionOptions = {
 	password: process.env.POSTGRES_PASSWORD || "postgres",
 	database: process.env.POSTGRES_DB || "pg_data",
 	entities: [LeafInfo],
-	ssl:{rejectUnauthorized:true},
+	ssl:{rejectUnauthorized:false},
 	migrations: [],
 	cli: {},
 	logging: true,
