@@ -1,4 +1,4 @@
-//    import 'reflect-metadata'; // ------------------------------------------------------- ?
+import 'reflect-metadata';
 import {createConnection} from "typeorm";
 import config from "./ormconfig";
 import {getApplication, port} from "./app";

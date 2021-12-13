@@ -1,4 +1,4 @@
-/pgdata
+/pg_data
 /.env
 /docker.env
 /node_modules
