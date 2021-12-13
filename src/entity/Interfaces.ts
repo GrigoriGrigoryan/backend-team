@@ -1,17 +1,14 @@
-import {Column} from "typeorm/browser";
-import {Max, Min} from "class-validator";
-import {JoinColumn, ManyToOne, OneToMany} from "typeorm";
-import WasteTypes from "./wasteTypes";
-import LeafInfo from "./leafInfo";
+import {LeafInfo} from "./LeafInfo";
 
 export interface ILeafInfo {
+	ecoStationName: string,
 	latitude: string,
 	longitude: string,
 	wasteTypes: string[],  // bottle , battery
 	paymentCondition: string, // paid free of condition
 	rating: number,
 	deliveryOptions: string[],
-	wasteType: WasteTypes[],
+	//wasteType: WasteTypes[],
 }
 
 export interface IWasteTypes {

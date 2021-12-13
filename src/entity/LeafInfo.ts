@@ -1,14 +1,16 @@
 import {Entity, OneToMany} from "typeorm";
 import {PrimaryGeneratedColumn} from "typeorm";
-import {Column} from "typeorm/browser";
-import WasteTypes from "./wasteTypes";
+import {Column} from "typeorm";
 import {Max, Min} from "class-validator";
-import {ILeafInfo} from "./interfaces";
+import {ILeafInfo} from "./Interfaces";
 
-@Entity()
-export default class LeafInfo implements ILeafInfo{
+@Entity("leaf")
+export class LeafInfo {
 	@PrimaryGeneratedColumn()
 	coordinate_id!: number;
+
+	@Column()
+	ecoStationName!:string;
 
 	@Column()
 	latitude!: string;
@@ -16,7 +18,7 @@ export default class LeafInfo implements ILeafInfo{
 	@Column()
 	longitude!: string;
 
-	@Column()
+	@Column("simple-array")
 	wasteTypes!: string[];  // bottle , battery
 
 	@Column()
@@ -27,9 +29,12 @@ export default class LeafInfo implements ILeafInfo{
 	@Max(10)
 	rating!: number;
 
-	@Column({nullable: true})
+	@Column("simple-array",{
+
+
+	})
 	deliveryOptions!: string[];
 
-	@OneToMany(() => WasteTypes, wasteTypes => wasteTypes.leafInfo, {cascade: true, eager: true})
-	wasteType!: WasteTypes[];
+	// @OneToMany(() => WasteTypes, wasteTypes => wasteTypes.leafInfo, {cascade: true, eager: true})
+	// wasteType!: WasteTypes[];
 }

@@ -1,11 +1,14 @@
-// import express from "express";
-// import {LeafController} from "../controllers/Leaf";
-//
-// const leafs = express.Router();
-// leafs
-// 	.get('/', LeafController.getAllLeafs)
-
 import express, {Router} from "express";
+import {LeafController} from "../controllers/Leaf";
 
-const leafs = express.Router();
+export const LeafRouter = Router();
+
+LeafRouter
+	.post('/', LeafController.createLeafInfo)
+	.get('/', LeafController.getAllLeafs)
+	.get('/:id', LeafController.getLeafById)
+	.patch('/:id', LeafController.updateLeaf)
+	.delete('/:id', LeafController.deleteLeaf);
+
+
 

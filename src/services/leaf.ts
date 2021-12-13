@@ -1,34 +1,9 @@
-// import {getRepository} from "typeorm";
-// import {LeafInfo} from "../entity";
-//
-// export default ({
-// 	async getLeafs() {
-// 		const leafs = await getRepository(LeafInfo).find()
-// 		if (leafs.length === 0) {
-// 			return [];
-// 		}
-// 		return leafs;
-// 	},
-// 	 async getLeafById(id: string) {
-// 		if(!Number(id)) {
-// 			throw `Bad Request`;
-// 		}
-// 		const leaf = await getRepository(LeafInfo).findOne(id);
-// 		if(leaf) {
-// 			return leaf;
-// 		} else {
-// 			return `Not found`;
-// 		}
-//
-// 	}
-// })
-
 import {getRepository} from "typeorm";
-import {LeafInfo} from "../entity";
+import {LeafInfo} from "../entity/LeafInfo";
 
 export default ({
 	async getAll() {
-		const leafs = await getRepository(LeafInfo).find()
+		const leafs = await getRepository(LeafInfo).find();
 		return leafs;
 	},
 	async getOne(id: string | number) {
