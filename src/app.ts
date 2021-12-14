@@ -22,8 +22,8 @@ export const getApplication = (): Express => {
 		.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 		.use(compression())
 		.get('/', (req: Request, res: Response) => {
-			res.send(`Just greeting`)
-			//res.redirect('https://green-team001.herokuapp.com/api-docks');
+			//res.send(`Just greeting`)
+			res.redirect('https://green-team001.herokuapp.com/api-docks');
 		});
 
 	return  app;
