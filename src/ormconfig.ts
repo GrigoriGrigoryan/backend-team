@@ -12,6 +12,7 @@ const config: ConnectionOptions = {
 	database: process.env.POSTGRES_DB || "pg_data",
 	entities: [LeafInfo],
 	//ssl:{rejectUnauthorized:false},
+
 	migrations: [],
 	cli: {},
 	logging: true,
