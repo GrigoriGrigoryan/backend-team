@@ -4,13 +4,10 @@ export interface ILeafInfo {
 	ecoStationName: string,
 	latitude: string,
 	longitude: string,
-	wasteTypes: string[],
+	wasteTypes: string[],  // bottle , battery
+	paymentCondition: string, // paid free of condition
 	rating: number,
 	deliveryOptions: string[],
-	address: string,
-	contact: string,
-	workingHours: string[];
-	// paymentCondition: string
 	//wasteType: WasteTypes[],
 }
 
