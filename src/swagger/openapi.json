@@ -1,46 +1,29 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a sample  Trello server API Documentation for our Group3 😎 \n Feel free to CRUD your groups , tickets and also comments \n For any question feel free to ask our BackEnd team😌 \n our server is running on ` http://localhost:5444/api-docs/ ` ",
+    "description": "This is a server API Documentation for our Green Team 😎 \n Feel free to CRUD your leaves \n For any question feel free to ask me on Microsoft Teams or contact me on Telegram ◀️ 😌 \n our server is running on `https://green-team001.herokuapp.com/api-docks ` ",
     "version": "1.0.0",
     "title": "Swagger Trello"
   },
   "tags": [
     {
-      "name": "board",
-      "description": ""
-    },
-    {
-      "name": "group",
-      "description": ""
-    },
-    {
-      "name": "ticket",
-      "description": ""
-    },
-    {
-      "name": "comment",
-      "description": ""
-    },
-    {
-      "name": "activity log",
+      "name": "leaves",
       "description": ""
     }
-
   ],
   "schemes": [
     "https",
     "http"
   ],
   "paths": {
-    "/group": {
+    "/leaves": {
       "post": {
         "tags": [
-          "group"
+          "leaves"
         ],
         "description": "",
-        "summary": "Add a new group to db",
-        "operationId": "addGroup",
+        "summary": "Add a new leave info to db",
+        "operationId": "addLeaf",
         "consumes": [
           "application/json",
           "application/xml"
@@ -53,7 +36,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Group object that needs to be added to db",
+            "description": "Leaf object that needs to be added to db",
             "required": true,
             "schema": {
               "type": "array",
@@ -61,9 +44,17 @@
                 "type": "string"
               },
               "example": {
-                "group_name": "Homepage",
-                "board_id": 3,
-                "user_id": 1
+                "ecoStationName": "Eco",
+                "latitude": "59.937500",
+                "longitude": "30.308611",
+                "address": "Fontanka River Embankment, 81, St Petersburg, Russia",
+                "addressRu" : "набережная реки Фонтанки, 81, Санкт-Петербург",
+                "wasteTypes": ["types_batteries", "types_plastic", "types_hazardous", "types_automotive"],
+                "rating": 4,
+                "deliveryOptions": ["eco taxi service"],
+                "deliveryOptionsRu": ["платное эко такси"] ,
+                "contact": "+7 495 692-39-11",
+                "workingHours": ["10-22", "10-22", "10-22", "10-22", "10-22", "10-18", "-"]
               }
             }
           }
@@ -85,10 +76,10 @@
       },
       "get": {
         "tags": [
-          "group"
+          "leaves"
         ],
-        "summary": "Return a list of groups",
-        "description": "Groups that are already created",
+        "summary": "Return a list of leaves",
+        "description": "Leaf that are already created",
         "produces": [
           "application/json",
           "application/xml"
@@ -103,20 +94,32 @@
               },
               "example": [
                 {
-                  "group_id": 2,
-                  "board_id": 3,
-                  "group_name": "Homepage",
-                  "pos": "0|hzzzzz:",
-                  "user_id": 1,
-                  "createdAt": "2021-10-11T13:30:17.950Z"
+                  "id": 123,
+                  "ecoStationName": "Eco",
+                  "latitude": "59.937500",
+                  "longitude": "30.308611",
+                  "address": "Fontanka River Embankment, 81, St Petersburg, Russia",
+                  "addressRu" : "набережная реки Фонтанки, 81, Санкт-Петербург",
+                  "wasteTypes": ["types_batteries", "types_plastic", "types_hazardous", "types_automotive"],
+                  "rating": 4,
+                  "deliveryOptions": ["paid eco taxi service"],
+                  "deliveryOptionsRu": ["платное эко такси"] ,
+                  "contact": "+7 495 692-39-11",
+                  "workingHours": ["10-22", "10-22", "10-22", "10-22", "10-22", "10-18", "-"]
                 },
                 {
-                  "group_id": 2139,
-                  "board_id": 123,
-                  "group_name": "Homepage",
-                  "pos": "0|gzzzzz:",
-                  "user_id": 1,
-                  "createdAt": "2021-10-11T13:34:17.990Z"
+                  "id": 35,
+                  "ecoStationName": "Plok",
+                  "latitude": "14.3352100",
+                  "longitude": "67.6367681",
+                  "address": "Kolomenskaya Ulitsa, 34, St Petersburg, Russia",
+                  "addressRu" : "Коломенская ул., 34, Санкт-Петербург",
+                  "wasteTypes": ["type_other", "type_tree", "type_lightBulbs'"],
+                  "rating": 4,
+                  "deliveryOptions": ["paid eco taxi service"],
+                  "deliveryOptionsRu": ["платное эко такси"] ,
+                  "contact": "+7 495 692-39-11",
+                  "workingHours": ["10-22", "10-22", "10-22", "10-22", "10-22", "10-18", "-"]
                 }
               ]
             }
@@ -124,13 +127,13 @@
         }
       }
     },
-    "/group/{group_id}": {
+    "/leaves/{id}": {
       "get": {
         "tags": [
-          "group"
+          "leaves"
         ],
-        "summary": "Find group by ID",
-        "description": "Returns a single group",
+        "summary": "Find Leaf by ID",
+        "description": "Returns a single leaf",
         "operationId": "getById",
         "produces": [
           "application/json",
@@ -138,9 +141,9 @@
         ],
         "parameters": [
           {
-            "name": "group_id",
+            "name": "id",
             "in": "path",
-            "description": "ID of group to return",
+            "description": "ID of leaf to return",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -155,12 +158,18 @@
                 "type": "string"
               },
               "example": {
-                "group_id": 312,
-                "board_id": 3,
-                "group_name": "Homepage",
-                "pos": "0|hzzzzz:",
-                "user_id": 1,
-                "createdAt": "2022-11-11T13:30:17.950Z"
+                "id": 35,
+                "ecoStationName": "Plok",
+                "latitude": "14.3352100",
+                "longitude": "67.6367681",
+                "address": "Kolomenskaya Ulitsa, 34, St Petersburg, Russia",
+                "addressRu" : "Коломенская ул., 34, Санкт-Петербург",
+                "wasteTypes": ["type_other", "type_tree", "type_lightBulbs'"],
+                "rating": 4,
+                "deliveryOptions": ["paid eco taxi service"],
+                "deliveryOptionsRu": ["платное эко такси"] ,
+                "contact": "+7 495 692-39-11",
+                "workingHours": ["10-22", "10-22", "10-22", "10-22", "10-22", "10-18", "-"]
               }
             }
           },
@@ -168,15 +177,15 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Group not found"
+            "description": "Leaf not found"
           }
         }
       },
       "patch": {
         "tags": [
-          "group"
+          "leaves"
         ],
-        "summary": "Updates a group in db with form data",
+        "summary": "Updates a leaf in db with form data",
         "description": "",
         "operationId": "updateGroupTicketOrder",
         "consumes": [
@@ -189,9 +198,9 @@
         ],
         "parameters": [
           {
-            "name": "group_id",
+            "name": "id",
             "in": "path",
-            "description": "ID of group that needs to be update",
+            "description": "ID of leaf that needs to be update",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -207,8 +216,9 @@
                 "type": "string"
               },
               "example": {
-                "group_name": "Homepage",
-                "pos": "0|hzzzzz:"
+                "ecoStationName": "EcoStTwo",
+                "wasteTypes": ["type_other", "type_tree", "type_lightBulbs'"],
+                "rating": 4
               }
             }
           }
@@ -218,7 +228,7 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Group not found"
+            "description": "Leaf not found"
           },
           "405": {
             "description": "Validation exception"
@@ -227,20 +237,20 @@
       },
       "delete": {
         "tags": [
-          "group"
+          "leaves"
         ],
-        "summary": "Deletes a group",
+        "summary": "Deletes a leaf",
         "description": "",
-        "operationId": "deleteGroup",
+        "operationId": "deleteLeaf",
         "produces": [
           "application/json",
           "application/xml"
         ],
         "parameters": [
           {
-            "name": "group_id",
+            "name": "id",
             "in": "path",
-            "description": "Group id to delete",
+            "description": "Leaf id to delete",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -251,762 +261,7 @@
             "description": "Invalid ID supplied"
           },
           "404": {
-            "description": "Group not found"
-          }
-        }
-      }
-    },
-    "/ticket": {
-      "post": {
-        "tags": [
-          "ticket"
-        ],
-        "summary": "Add a new ticket to db",
-        "description": "",
-        "operationId": "addTicket",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Ticket that needs to be added to group",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "ticket_name": "Backlog",
-                "group_id": 71,
-                "user_id": 1
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succsesfully Created"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "405": {
-            "description": "Invalid input"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "ticket"
-        ],
-        "summary": "Return a list of tickets",
-        "description": "Tickets that are already created",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": [
-                {
-                  "ticket_id": 2,
-                  "group_id": 71,
-                  "ticket_name": "Backlog",
-                  "ticket_description": null,
-                  "pos": "0|hzzzzz:",
-                  "user_id": 1,
-                  "createdAt": "2021-10-11T13:30:17.950Z"
-                },
-                {
-                  "ticket_id": 3,
-                  "group_id": 71,
-                  "ticket_name": "FrontEnd",
-                  "ticket_description": null,
-                  "pos": "0|hzzzzz:",
-                  "user_id": 1,
-                  "createdAt": "2022-11-11T13:30:17.950Z"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/ticket/{ticket_id}": {
-      "get": {
-        "tags": [
-          "ticket"
-        ],
-        "summary": "Find ticket by ID",
-        "description": "Returns a single ticket",
-        "operationId": "getTicketById",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "ticket_id",
-            "in": "path",
-            "description": "ID of ticket to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "ticket_id": 3,
-                "group_id": 71,
-                "ticket_name": "FrontEnd",
-                "pos": "0|hzzzzz:",
-                "ticket_description": null,
-                "user_id": 1,
-                "createdAt": "2022-11-11T13:30:17.950Z"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Ticket not found"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "ticket"
-        ],
-        "summary": "Updates a ticket in db with form data",
-
-        "description": "",
-        "operationId": "updateTicketWithForm",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "ticket_id",
-            "in": "path",
-            "description": "ID of ticket that needs to be update",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "property that needs to be updated",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "ticket_name": "Backlog",
-                "ticket_complete_time": "01:34:25",
-                "pos": "0|hzzzzz:"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Ticket not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "ticket"
-        ],
-        "summary": "Deletes a ticket",
-        "description": "",
-        "operationId": "deleteTicket",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "ticket_id",
-            "in": "path",
-            "description": "Group id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Group not found"
-          }
-        }
-      }
-    },
-    "/comment": {
-      "post": {
-        "tags": [
-          "comment"
-        ],
-        "summary": "Add a new comment to ticket",
-        "description": "",
-        "operationId": "addComment",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Comment that needs to be added to ticket",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "content": "Added Some Comment",
-                "ticket_id": 87,
-                "user_id": 1
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succsesfully Created"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "405": {
-            "description": "Invalid input"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "comment"
-        ],
-        "summary": "Return a list of comments",
-        "description": "Comments that are already created",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": [
-                {
-                  "comment_id": 4,
-                  "ticket_id": 87,
-                  "content": "Added some comment",
-                  "user_id": 1,
-                  "createdAt": "2021-10-11T21:12:28.335Z"
-                },
-                {
-                  "comment_id": 5,
-                  "ticket_id": 87,
-                  "content": null,
-                  "user_id": 1,
-                  "createdAt": "2021-10-11T21:12:28.335Z"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/comment/{comment_id}": {
-      "get": {
-        "tags": [
-          "comment"
-        ],
-        "summary": "Find comment by ID",
-        "description": "Returns a single comment",
-        "operationId": "getCommentById",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "comment_id",
-            "in": "path",
-            "description": "ID of comment to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "comment_id": 5,
-                "ticket_id": 87,
-                "content": null,
-                "user_id": 1,
-                "createdAt": "2021-10-11T21:12:28.335Z"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Comment not found"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "comment"
-        ],
-        "summary": "Updates a comment in comment",
-        "description": "",
-        "operationId": "updateCommentWithForm",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "comment_id",
-            "in": "path",
-            "description": "ID of comment that needs to be update",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "property that needs to be updated",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "content": "please put your github repo"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Comment Not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "comment"
-        ],
-        "summary": "Deletes a comment",
-        "description": "",
-        "operationId": "deleteComment",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "comment_id",
-            "in": "path",
-            "description": "Comment id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Group not found"
-          }
-        }
-      }
-    },
-    "/activity_log": {
-      "post": {
-        "tags": [
-          "activity log"
-        ],
-        "description": "",
-        "summary": "Add a new log to db",
-        "operationId": "addLog",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Activity Log object that needs to be added to db",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              },
-              "example": {
-                "ticket_id": 1,
-                "current_list": "group2",
-                "prev_list": "group1"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succsesfully Created"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "405": {
-            "description": "Invalid input"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "activity log"
-        ],
-        "summary": "Return a list of logs",
-        "description": "Logs that are already created",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "number"
-              },
-              "example": [
-                {
-                  "id": 2,
-                  "current_list": "group2",
-                  "ticket_id": 1,
-                  "prev_list": "group1",
-                  "createdAt": "2021-10-11T13:30:17.950Z"
-                },
-                {
-                  "id": 21,
-                  "current_list": "group4",
-                  "ticket_id": 12,
-                  "prev_list": "group3",
-                  "createdAt": "2021-11-12T21:22:34.950Z"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/board": {
-      "post": {
-        "tags": [
-          "board"
-        ],
-        "description": "",
-        "summary": "Add a new board to db",
-        "operationId": "addBoard",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Board object that needs to be added to db",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "name": "Board 1",
-                "board_image_url": "assets/images/board-img1.jpg",
-                "user_id": 1
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Succsesfully Created"
-          },
-          "404": {
-            "description": "Not found"
-          },
-          "405": {
-            "description": "Invalid input"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "board"
-        ],
-        "summary": "Return a list of boards",
-        "description": "Boards that are already created",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": [
-                {
-                  "board_id": 1,
-                  "name": "Group1",
-                  "board_image_url": "assets/images/board-img1.jpg",
-                  "user_id": 1,
-                  "createdAt": "2021-10-20T13:06:16.439Z"
-                },
-                {
-                  "board_id": 2,
-                  "name": "Group2",
-                  "board_image_url": "assets/images/board-img1.jpg",
-                  "user_id": 1,
-                  "createdAt": "2021-10-20T13:06:16.439Z"
-                }
-              ]
-            }
-          }
-        }
-      }
-    },
-    "/board/{board_id}": {
-      "get": {
-        "tags": [
-          "board"
-        ],
-        "summary": "Find board by ID",
-        "description": "Returns a single board",
-        "operationId": "getBy_Id",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "board_id",
-            "in": "path",
-            "description": "ID of board to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "board_id": 1,
-                "name": "Group1",
-                "board_image_url": "assets/images/board-img1.jpg",
-                "user_id": 1,
-                "createdAt": "2021-10-20T13:06:16.439Z"
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Board not found"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "board"
-        ],
-        "summary": "Updates a board in db with form data",
-        "description": "",
-        "operationId": "updateBoardWithForm",
-        "consumes": [
-          "application/json",
-          "application/xml"
-        ],
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "board_id",
-            "in": "path",
-            "description": "ID of board that needs to be update",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "property that needs to be updated",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "example": {
-                "name": "Board 1"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Board not found"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "board"
-        ],
-        "summary": "Deletes a board",
-        "description": "",
-        "operationId": "deleteBoard",
-        "produces": [
-          "application/json",
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "board_id",
-            "in": "path",
-            "description": "Board id to delete",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Board not found"
+            "description": "Leaf not found"
           }
         }
       }
