@@ -33,6 +33,7 @@ export default ({
 			 getRepository(LeafInfo).merge(leaf, body)
 			return await getRepository(LeafInfo).save(leaf);
 		}
+		return `Not found`
 	},
 	async deleteLeaf(id: string | number) {
 		if (!Number(id)) {
@@ -40,7 +41,7 @@ export default ({
 		}
 		const leaf = await getRepository(LeafInfo).findOne(id);
 		if (leaf) {
-		return 	getRepository(LeafInfo).delete(leaf);
+		return 	getRepository(LeafInfo).delete(id);
 		}
 		return `Not found`;
 	}

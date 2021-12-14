@@ -1,6 +1,9 @@
-import { IsInt, IsString} from "class-validator";
+import {IsArray, IsInt, IsString} from "class-validator";
 
 export class LeafDto {
+	@IsString()
+	ecoStationName!: string;
+
     @IsString()
 	latitude!: string;
 
@@ -8,7 +11,22 @@ export class LeafDto {
 	longitude!: string;
 
 	@IsString()
-	paymentCondition!: string; // paid free of condition
+	address!: string;
+
+	@IsArray()
+	wasteTypes!: string[];
+
+	// @IsString()
+	// paymentCondition!: string;
+
+	@IsArray()
+	deliveryOptions!: string[];
+
+	@IsString()
+	contact!: string;
+
+	@IsArray()
+	workingHours!: string[]
 
 	@IsInt()
 	rating!: number;
