@@ -1,13 +1,16 @@
-import express, {Router} from "express";
+import {Router} from "express";
 import {LeafController} from "../controllers/Leaf";
+import LeafDto from "../schema/leafSchema";
+import UpdateLeafInfo from "../schema/updateLeafInfo"
+import {validateRequestSchema} from "../middleware/leafValidation";
 
 export const LeafRouter = Router();
 
 LeafRouter
-	.post('/', LeafController.createLeafInfo)
+	.post('/', LeafDto,validateRequestSchema,LeafController.createLeafInfo)
 	.get('/', LeafController.getAllLeafs)
 	.get('/:id', LeafController.getLeafById)
-	.patch('/:id', LeafController.updateLeaf)
+	.patch('/:id',UpdateLeafInfo,validateRequestSchema, LeafController.updateLeaf)
 	.delete('/:id', LeafController.deleteLeaf);
 
 

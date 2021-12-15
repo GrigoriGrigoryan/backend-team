@@ -1,5 +1,7 @@
 import {getRepository} from "typeorm";
 import {LeafInfo} from "../entity/LeafInfo";
+import {LeafDto} from "../dto/LeafDto";
+import {UpdateLeafDto} from "../dto/UpdateLeafDto";
 
 export default ({
 	async getAll() {
@@ -16,7 +18,7 @@ export default ({
 		}
 		return `Not Found`;
 	},
-	async createLeaf(body: any) {
+	async createLeaf(body: LeafDto) {
 		if(!body) {
 			throw `Bad Request`;
 		}
@@ -24,7 +26,7 @@ export default ({
 
 	return await getRepository(LeafInfo).save(leaf);
 	},
-	async updateLeaf(id: string | number, body: any) {
+	async updateLeaf(id: string | number, body: UpdateLeafDto) {
 		if (!Number(id)) {
 			throw `Bad request`
 		}
