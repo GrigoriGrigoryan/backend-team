@@ -18,4 +18,5 @@ const config: ConnectionOptions = {
 	logging: true,
 	synchronize: true,
 }
+
 export default config;

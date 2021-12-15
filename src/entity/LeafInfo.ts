@@ -1,4 +1,4 @@
-import {Entity, OneToMany} from "typeorm";
+import {Entity} from "typeorm";
 import {PrimaryGeneratedColumn} from "typeorm";
 import {Column} from "typeorm";
 import {Max, Min} from "class-validator";
@@ -9,7 +9,7 @@ export class LeafInfo implements ILeafInfo{
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@Column()
+	@Column({nullable: true})
 	ecoStationName!:string;
 
 	@Column()
@@ -25,15 +25,9 @@ export class LeafInfo implements ILeafInfo{
 	addressRu!: string;
 
 	@Column("simple-array")
-	wasteTypes!: string[];  // bottle , battery
+	wasteTypes!: string[];
 
-	// @Column()
-	// paymentCondition!: string;
-	//
-	// @Column()
-	// paymentConditionRu!: string;
-
-	@Column({})
+	@Column({nullable: true})
 	@Min(0)
 	@Max(5)
 	rating!: number;
@@ -51,7 +45,4 @@ export class LeafInfo implements ILeafInfo{
 
 	@Column("simple-array")
 	workingHours!: string[]
-
-	// @OneToMany(() => WasteTypes, wasteTypes => wasteTypes.leafInfo, {cascade: true, eager: true})
-	// wasteType!: WasteTypes[];
 }

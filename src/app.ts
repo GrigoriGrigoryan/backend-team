@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import compression from "compression";
 import swaggerUI from 'swagger-ui-express';
 import * as swaggerDocs from './swagger/openapi.json';
+import {body, validationResult} from "express-validator";
 import dotenv from 'dotenv';
 import helmet from "helmet";
 import {LeafRouter} from "./routes/leafs";
