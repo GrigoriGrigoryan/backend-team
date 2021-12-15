@@ -9,3 +9,8 @@ export interface ILeafInfo {
 	contact: string,
 	workingHours: string[],
 }
+
+export interface IComment {
+	content: string;
+	createdAt: Date;
+}

@@ -2,6 +2,7 @@
 import {ConnectionOptions} from "typeorm";
 import dotenv from "dotenv";
 import {LeafInfo} from "./entity/LeafInfo";
+import {Comment} from "./entity/Comment";
 dotenv.config();
 
 const config: ConnectionOptions = {
@@ -11,7 +12,7 @@ const config: ConnectionOptions = {
 	username: process.env.POSTGRES_USERNAME || "postgres",
 	password: process.env.POSTGRES_PASSWORD || "postgres",
 	database: process.env.POSTGRES_DB || "pg_data",
-	entities: [LeafInfo],
+	entities: [LeafInfo, Comment],
 	ssl:{rejectUnauthorized:false},
 	migrations: [],
 	cli: {},

@@ -9,6 +9,7 @@ import {body, validationResult} from "express-validator";
 import dotenv from 'dotenv';
 import helmet from "helmet";
 import {LeafRouter} from "./routes/leafs";
+import {CommentRouter} from "./routes/comment"
 dotenv.config();
 
 export const port = process.env.PORT || 8888
@@ -20,6 +21,7 @@ export const getApplication = (): Express => {
 		.use(helmet())
 		.use(morgan('tiny'))
 		.use('/leaves', LeafRouter)
+		.use('/comment', CommentRouter)
 		.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs))
 		.use(compression())
 		.get('/', (req: Request, res: Response) => {
