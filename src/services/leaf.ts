@@ -6,6 +6,9 @@ import {UpdateLeafDto} from "../dto/UpdateLeafDto";
 export default ({
 	async getAll() {
 		const leafs = await getRepository(LeafInfo).find();
+		leafs.forEach((leafe) =>
+		leafe.comments.sort((a, b) => a.comment_id- b.comment_id)
+		)
 		return leafs;
 	},
 	async getOne(id: string | number) {

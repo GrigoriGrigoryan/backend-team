@@ -1,8 +1,7 @@
-import {Entity} from "typeorm";
-import {PrimaryGeneratedColumn} from "typeorm";
-import {Column} from "typeorm";
+import {Entity, OneToMany, PrimaryGeneratedColumn, Column} from "typeorm";
 import {Max, Min} from "class-validator";
 import {ILeafInfo} from "./Interfaces";
+import {Comment} from "./Comment";
 
 @Entity("leaf")
 export class LeafInfo implements ILeafInfo{
@@ -45,4 +44,7 @@ export class LeafInfo implements ILeafInfo{
 
 	@Column("simple-array")
 	workingHours!: string[]
+
+	@OneToMany(() => Comment, comment => comment.leafInfo, {eager:true})
+	comments!: Comment[];
 }
