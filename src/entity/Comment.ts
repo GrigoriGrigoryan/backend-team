@@ -10,8 +10,11 @@ export class Comment implements IComment{
 	@Column()
 	id!: number;
 
-	@Column()
+	@Column({nullable: true})
 	content!: string;
+
+	@Column( {nullable: true})
+	rating_info!: number;
 
 	@CreateDateColumn()
 	createdAt!: Date;
