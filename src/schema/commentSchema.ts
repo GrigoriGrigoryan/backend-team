@@ -2,7 +2,7 @@ import {body} from "express-validator";
 
 const commentSchema = [
 	body('id').isInt(),
-	body('content').isString(),
+	body('content').optional().isString(),
 	body('rating_info').optional().isInt()
 ]
 
