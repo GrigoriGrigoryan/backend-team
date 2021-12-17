@@ -26,7 +26,7 @@ export class LeafInfo implements ILeafInfo{
 	@Column("simple-array")
 	wasteTypes!: string[];
 
-	@Column({nullable: true})
+	@Column({nullable: true, type: "float"})
 	@Min(0)
 	@Max(5)
 	rating!: number;
@@ -41,6 +41,9 @@ export class LeafInfo implements ILeafInfo{
 
 	@Column()
 	contact!: string;
+
+	@Column( "int",{nullable: true, array:true})
+	rating_array!: number[];
 
 	@Column("simple-array")
 	workingHours!: string[]

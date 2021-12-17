@@ -15,6 +15,7 @@ export default ({
 		if(!Number(id)) {
 			throw `Bad request`;
 		}
+
 		const leaf = await getRepository(LeafInfo).findOne(id);
 		if (leaf) {
 			leaf.comments.sort((a, b) => a.comment_id- b.comment_id);

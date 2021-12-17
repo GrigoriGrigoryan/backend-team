@@ -9,7 +9,8 @@ const schema = [
 	body('deliveryOptions').isArray(),
 	body('contact').isString(),
 	body('workingHours').isArray(),
-	body('rating').optional().isInt()
+	body('rating').optional().isInt(),
+	body('rating_array').optional().isArray(),
 ]
 
 export default schema;
