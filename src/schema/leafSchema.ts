@@ -10,6 +10,7 @@ const schema = [
 	body('contact').isString(),
 	body('workingHours').isArray(),
 	body('rating').optional().isInt(),
+	body('rating_count').optional().isInt(),
 	body('rating_array').optional().isArray(),
 ]
 
