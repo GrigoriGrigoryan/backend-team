@@ -42,6 +42,9 @@ export class LeafInfo implements ILeafInfo{
 	@Column()
 	contact!: string;
 
+	@Column({nullable: true})
+	rating_count!: number;
+
 	@Column( "int",{nullable: true, array:true})
 	rating_array!: number[];
 
