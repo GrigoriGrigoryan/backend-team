@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a server API Documentation for our Green Team 😎 \n Feel free to CRUD your leaves \n For any question feel free to ask me on Microsoft Teams or contact me on Telegram ◀️ 😌 \n our server is running on `https://green-team001.herokuapp.com/api-docks ` ",
+    "description": "This is a server API Documentation  \n Feel free to CRUD your leaves \n For any question feel free to ask me via mail or contact me on Telegram ◀️ 😌 \n  ` ",
     "version": "1.0.0",
     "title": "Swagger Trello"
   },
