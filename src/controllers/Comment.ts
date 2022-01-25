@@ -1,47 +1,58 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import comment from "../services/comment";
+import {ExceptionMessages, HttpErr} from "../exceptions";
+import StatusCode from "../exceptions/statusCodes";
 
 class Comment {
-	public async createComment(req: Request, res: Response) {
+	public async createComment(req: Request, res: Response, next: NextFunction) {
 		try {
-			const sendingData = await comment.create(req.body)
-			return res.send(sendingData);
+			const data = await comment.create(req.body)
+			res.status(StatusCode.CreateRequest).json(data);
 		} catch (err) {
-			res.send(err)
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
-	public async getComment(req: Request, res: Response) {
+	public async getComment(req: Request, res: Response, next: NextFunction) {
 		try {
-			const sendingData = await comment.getAll()
-			return res.send(sendingData);
+			const data = await comment.getAll();
+			res.status(StatusCode.SuccessRequest).json(data);
 		} catch (err) {
-			res.send(err)
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
-	public async getCommentById(req: Request, res: Response) {
+	public async getCommentById(req: Request, res: Response, next: NextFunction) {
 		try {
-			const sendingData = await comment.getOne(req.params.id)
-			return res.send(sendingData);
+			const data = await comment.getOne(req.params.id);
+			if (!data) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.COMMENT));
+			}
+			res.status(StatusCode.SuccessRequest).json(data);
 		} catch (err) {
-			res.send(err)
-		}
-	};
-
-	public async updateComment(req: Request, res: Response) {
-		try {
-			const sendingData = await comment.update(req.params.id, req.body)
-			return res.send(sendingData);
-		} catch (err) {
-			res.send(err)
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
 
-	public async deleteComment(req: Request, res: Response) {
+	public async updateComment(req: Request, res: Response, next: NextFunction) {
 		try {
-			const sendingData = await comment.deleteComment(req.params.id)
-			return res.send(sendingData);
+			const updatedData = await comment.update(req.params.id, req.body)
+			if (!updatedData) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.COMMENT));
+			}
+			res.status(StatusCode.SuccessRequest).json(updatedData);
 		} catch (err) {
-			res.send(err)
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
+		}
+	};
+
+	public async deleteComment(req: Request, res: Response, next: NextFunction) {
+		try {
+			const deletedData = await comment.deleteComment(req.params.id);
+			if (!deletedData) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.COMMENT));
+			}
+			res.status(StatusCode.SuccessRequest).json(deletedData);
+		} catch (err) {
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
 }

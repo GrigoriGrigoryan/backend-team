@@ -1,50 +1,61 @@
-import {Response, Request} from "express";
+import {Response, Request, NextFunction} from "express";
 import  leaf  from "../services/leaf"
+import {ExceptionMessages, HttpErr} from "../exceptions";
+import StatusCode from "../exceptions/statusCodes";
 
 class Leaf {
-	public async getAllLeafs(req: Request, res: Response) {
+	public async getAllLeaves(req: Request, res: Response, next: NextFunction) {
 		try {
-			 const sendingData = await leaf.getAll();
-			 res.send(sendingData);
+			 const data = await leaf.getAll();
+			 res.status(StatusCode.SuccessRequest).json(data);
 		 } catch (err) {
-			res.send(err);
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		 }
 	};
-	public async getLeafById(req: Request, res: Response) {
+	public async getLeafById(req: Request, res: Response, next: NextFunction) {
 		try {
 			const id = req.params.id
-			const sendingData = await leaf.getOne(id)
-			res.send(sendingData);
+			const data = await leaf.getOne(id);
+			if (!data) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.LEAF));
+			}
+			res.status(StatusCode.SuccessRequest).json(data);
 		} catch (err) {
-			res.send(err);
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	}
-	public async createLeafInfo(req: Request, res: Response) {
+	public async createLeafInfo(req: Request, res: Response, next: NextFunction) {
 		try {
 			const body = req.body;
-			const sendingData = await leaf.createLeaf(body);
-			res.send(sendingData);
+			const data = await leaf.createLeaf(body);
+			res.status(StatusCode.CreateRequest).json(data);
 		} catch (err) {
-			res.send(err);
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
-	public async updateLeaf(req: Request, res: Response) {
+	public async updateLeaf(req: Request, res: Response, next: NextFunction) {
 		try {
 			const id = req.params.id;
 			const body = req.body;
-			const sendingData = await leaf.updateLeaf(id, body);
-			res.send(sendingData);
+			const updateData = await leaf.updateLeaf(id, body);
+			if (!updateData) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.LEAF));
+			}
+			res.status(StatusCode.SuccessRequest).json(updateData);
 		} catch (err) {
-			res.send(err);
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	} ;
-	public async deleteLeaf(req: Request, res: Response) {
+	public async deleteLeaf(req: Request, res: Response, next: NextFunction) {
 		try {
 			const id = req.params.id;
-			const sendingData = await leaf.deleteLeaf(id);
-			res.send(sendingData);
+			const deletedData = await leaf.deleteLeaf(id);
+			if (!deletedData) {
+				next(HttpErr.notFound(ExceptionMessages.NOT_FOUND.LEAF));
+			}
+			res.status(StatusCode.SuccessRequest).json(deletedData);
 		} catch (err) {
-			res.send(err);
+			next(HttpErr.internalServerError(ExceptionMessages.INTERNAL));
 		}
 	};
 }
