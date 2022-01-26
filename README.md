@@ -214,7 +214,7 @@ Project Link: [https://github.com/GrigoriGrigoryan/backend-team](https://github.
 
 [forks-shield]: https://img.shields.io/github/forks/GrigoriGrigoryan/backend-team.svg?style=for-the-badge
 [forks-url]: https://github.com/GrigoriGrigoryan/backend-team/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/GrigoriGrigoryan/backend-team.svg?style=for-the-badge
 [stars-url]: https://github.com/GrigoriGrigoryan/backend-team/stargazers
 [issues-shield]: https://img.shields.io/github/issues/GrigoriGrigoryan/backend-team.svg?style=for-the-badge
 [issues-url]: https://github.com/GrigoriGrigoryan/backend-team/issues
