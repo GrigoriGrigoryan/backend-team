@@ -1,6 +1,6 @@
 import {Router} from "express";
 import CommentSchema from "../schema/commentSchema";
-import {CommentController} from "../controllers/Comment";
+import {CommentController} from "../controllers";
 import UpdateCommentSchema from "../schema/updateCommentSchema";
 import {validateRequestSchema} from "../middleware/validation";
 

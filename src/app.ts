@@ -1,23 +1,26 @@
 import * as process from "process";
-import express,  {Express, Response, Request} from "express";
+import express, {Express, Response, Request, NextFunction} from "express";
 import cors from "cors";
 import morgan from 'morgan';
 import compression from "compression";
 import swaggerUI from 'swagger-ui-express';
 import * as swaggerDocs from './swagger/openapi.json';
-import {body, validationResult} from "express-validator";
 import dotenv from 'dotenv';
 import helmet from "helmet";
 import {LeafRouter} from "./routes/leafs";
-import {CommentRouter} from "./routes/comment"
+import {CommentRouter} from "./routes/comment";
+ import { HttpErr } from './exceptions';
+import { errorHandler } from './controllers';
 dotenv.config();
 
 export const port = process.env.PORT || 8888
 
-export const getApplication = (): Express => {
-	const app = express()
+export const getApplication = (): Express =>
+	  (express()
 		.use(express.json())
-		.use(cors())
+		.use(cors({
+			origin: '*'
+		}))
 		.use(helmet())
 		.use(morgan('tiny'))
 		.use('/leaves', LeafRouter)
@@ -27,7 +30,9 @@ export const getApplication = (): Express => {
 		.get('/', (req: Request, res: Response) => {
 			res.send(`Just greeting`)
 			//res.redirect('https://green-team001.herokuapp.com/api-docks');
-		});
+		})
+		.all('*', (req: Request, res: Response, next: NextFunction) => {
+				next(HttpErr.notFound(`Can't find ${req.originalUrl} on this server!`));
+			})
+		.use(errorHandler));
 
-	return  app;
-};

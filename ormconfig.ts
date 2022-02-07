@@ -1,8 +1,8 @@
-
 import {ConnectionOptions} from "typeorm";
 import dotenv from "dotenv";
-import {LeafInfo} from "./entity/LeafInfo";
-import {Comment} from "./entity/Comment";
+import {LeafInfo} from "./src/entity";
+import {Comment} from "./src/entity";
+import path from "path";
 dotenv.config();
 
 const config: ConnectionOptions = {
@@ -13,11 +13,17 @@ const config: ConnectionOptions = {
 	password: process.env.POSTGRES_PASSWORD || "postgres",
 	database: process.env.POSTGRES_DB || "pg_data",
 	entities: [LeafInfo, Comment],
-	ssl:{rejectUnauthorized:false},
-	migrations: [],
-	cli: {},
+	// ssl:{rejectUnauthorized:false},
+	migrationsRun: true,
+	migrations:[
+	  path.join(__dirname, "src/db/migrations/**/*.ts")
+	],
+	cli:{
+	  migrationsDir:path.join(__dirname, "src/db/migrations"),
+	  entitiesDir:path.join(__dirname, "src/entities")
+	},
 	logging: true,
-	synchronize: true,
+	synchronize: false,
 }
 
 export default config;

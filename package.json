@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && npm run execute",
     "build": "tsc --build",
-    "execute": "nodemon --legacy-watch ./dist/server.js"
+    "execute": "nodemon --legacy-watch ./dist/server.js",
+    "typeorm:migration:generate": "ts-node ./node_modules/typeorm/cli migration:generate -n"
   },
   "keywords": [],
   "author": "Grigori Grigoryan",

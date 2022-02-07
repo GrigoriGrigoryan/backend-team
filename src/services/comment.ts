@@ -1,73 +1,66 @@
 import {getRepository} from "typeorm";
-import {Comment} from "../entity/Comment";
-import {LeafInfo} from "../entity/LeafInfo";
+import {Comment} from "../entity";
+import {LeafInfo} from "../entity";
 import {rating} from "../utils/rating";
 
 
 export default({
 	async create(body: any) {
-		if (!body) {
-			throw `Bad request`
-		}
 		const [id , rating_info] = [body.id, body.rating_info]
-		const leafe = await getRepository(LeafInfo).findOne(id)
-		if (!leafe) {
-			return `Not Valid Leafe Id`
+		const leaf = await getRepository(LeafInfo).findOne(id)
+		if (!leaf) {
+			return null;
 		}
 		if(rating_info) {
-			if (!leafe.rating_array) {
+			if (!leaf.rating_array) {
 
-				leafe.rating_array = [];
+				leaf.rating_array = [];
 
-				await getRepository(LeafInfo).save(leafe)
+				await getRepository(LeafInfo).save(leaf)
 			}
-			if (!leafe.rating_count) {
+			if (!leaf.rating_count) {
 
-				leafe.rating_count = 0;
-				if (leafe.rating) {
-					leafe.rating_count = 1
-					leafe.rating_array = [leafe.rating]
-					await getRepository(LeafInfo).save(leafe);
+				leaf.rating_count = 0;
+				if (leaf.rating) {
+					leaf.rating_count = 1
+					leaf.rating_array = [leaf.rating]
+					await getRepository(LeafInfo).save(leaf);
 				}
 			}
 
-			if (leafe.rating_array.length >= 2) {
+			if (leaf.rating_array.length >= 2) {
 
-				leafe.rating_count = leafe.rating_array.length;
-				leafe.rating_array	= [(leafe.rating_array.reduce((a, b) => a + b))];
+				leaf.rating_count = leaf.rating_array.length;
+				leaf.rating_array	= [(leaf.rating_array.reduce((a, b) => a + b))];
 
-				await getRepository(LeafInfo).save(leafe);
+				await getRepository(LeafInfo).save(leaf);
 			}
-			leafe.rating_array.push(rating_info);
-			leafe.rating_count++;
+			leaf.rating_array.push(rating_info);
+			leaf.rating_count++;
 
-			await getRepository(LeafInfo).save(leafe);
-			const rate = rating(leafe.rating_array, leafe.rating_count);
-			leafe.rating_array = [(leafe.rating_array.reduce((a, b) => a + b))];
-			if (rate != leafe.rating) {
-				leafe.rating = rate;
+			await getRepository(LeafInfo).save(leaf);
+			const rate = rating(leaf.rating_array, leaf.rating_count);
+			leaf.rating_array = [(leaf.rating_array.reduce((a, b) => a + b))];
+			if (rate != leaf.rating) {
+				leaf.rating = rate;
 			}
 
-			await getRepository(LeafInfo).save(leafe)
+			await getRepository(LeafInfo).save(leaf)
 		}
 		const comment =  getRepository(Comment).create(body);
 		return getRepository(Comment).save(comment);
 	},
 	async getAll() {
-		 const comments = await getRepository(Comment).find();
-		 return comments;
+		  return  await getRepository(Comment).find();
 	},
 	async getOne(id: string | number) {
 		const comment = await getRepository(Comment).findOne(id);
 		if (!comment) {
-			throw `Not found`
+			return  null;
 		}
 		return comment;
 	},
 	async update(id: number | string, body: any) {
-		if (!Number(id)) {
-			throw `Bad request`
-		}
 		const comment = await getRepository(Comment).findOne(id);
 		if (comment) {
 			getRepository(Comment).merge(comment, body);
@@ -75,13 +68,10 @@ export default({
 		}
 	},
 	async deleteComment(id: number | string) {
-		if (!Number(id)) {
-			throw `Bad request`;
-		}
 		const comment = await getRepository(Comment).findOne(id);
 		if (comment) {
 			return  getRepository(Comment).delete(id)
 		}
-		return `Bad request`;
+		return null;
 	}
 })
