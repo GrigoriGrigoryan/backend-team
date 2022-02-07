@@ -73,7 +73,7 @@ Here's why:
 * You shouldn't be doing the same tasks over and over 
 * You should implement DRY principles to the rest of your life :smile:
 
-I'll be adding more functionality in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+I'll be adding more functionality in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
 
 
