@@ -13,7 +13,7 @@ const config: ConnectionOptions = {
 	password: process.env.POSTGRES_PASSWORD || "postgres",
 	database: process.env.POSTGRES_DB || "pg_data",
 	entities: [LeafInfo, Comment],
-	// ssl:{rejectUnauthorized:false},
+	ssl:{rejectUnauthorized:true},
 	migrationsRun: true,
 	migrations:[
 	  path.join(__dirname, "src/db/migrations/**/*.ts")
